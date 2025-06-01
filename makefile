@@ -3,7 +3,7 @@ CC = cc
 RM = rm -rf
 FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
-SRC = philo_doubleptr.c
+SRC = philo_new.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
