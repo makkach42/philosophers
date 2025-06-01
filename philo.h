@@ -6,12 +6,12 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:36 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/01 09:58:14 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/01 11:14:24 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_NEW_H
-# define PHILO_NEW_H
+#ifndef PHILO_H
+# define PHILO_H
 
 #include <stdio.h>
 #include <unistd.h>
