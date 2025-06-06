@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:15 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/03 14:29:41 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/06 12:01:54 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char *argv[])
 		philo_sum = ft_atoi(argv[1]);
 		init_shared(&shared, philo_sum);
 		arr_maker(&arr, philo_sum, argv, &shared);
-		arr[0]->mutexes->simulation_running = 1;
+		arr[0]->shared_data->simulation_running = 1;
 		fork_maker(&arr_forks, philo_sum);
 		set_forks_for_philos(&arr, &arr_forks);
 		shared.philos = arr;

@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:52:07 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/03 09:52:16 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/06 12:02:38 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	check_simulation_state(t_philosopher *philo)
 {
 	int	should_continue;
 
-	pthread_mutex_lock(&philo->mutexes->state_mutex);
-	should_continue = (philo->mutexes->simulation_running
+	pthread_mutex_lock(&philo->shared_data->state_mutex);
+	should_continue = (philo->shared_data->simulation_running
 			) && (philo->state
 			) != DEAD && (philo->state) != FINISHED;
-	pthread_mutex_unlock(&philo->mutexes->state_mutex);
+	pthread_mutex_unlock(&philo->shared_data->state_mutex);
 	return (should_continue);
 }
 
@@ -76,7 +76,7 @@ void	arr_maker(t_philosopher ***arr,
 		(*arr)[i]->left = NULL;
 		(*arr)[i]->right = NULL;
 		(*arr)[i]->state = ALIVE;
-		(*arr)[i]->mutexes = shared;
+		(*arr)[i]->shared_data = shared;
 		if (argv[5])
 			(*arr)[i]->times_to_eat = ft_atoi(argv[5]);
 		else

@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:49:42 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/03 09:44:51 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/06 12:03:08 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,16 @@ void	print_status(t_philosopher *philo, char *status)
 {
 	long	current_time;
 
-	pthread_mutex_lock(&philo->mutexes->print_mutex);
-	if (philo->mutexes->simulation_running)
+	pthread_mutex_lock(&philo->shared_data->print_mutex);
+	if (philo->shared_data->simulation_running)
 	{
 		current_time = get_time_ms();
 		printf("%ld %d %s\n",
-			current_time - philo->mutexes->start_time,
+			current_time - philo->shared_data->start_time,
 			philo->philo_id,
 			status);
 	}
-	pthread_mutex_unlock(&philo->mutexes->print_mutex);
+	pthread_mutex_unlock(&philo->shared_data->print_mutex);
 }
 
 void	ft_usleep(long time_ms, t_philosopher *philo)
@@ -103,15 +103,15 @@ void	ft_usleep(long time_ms, t_philosopher *philo)
 	start_time = get_time_ms();
 	while (1)
 	{
-		pthread_mutex_lock(&philo->mutexes->state_mutex);
-		if ((!philo->mutexes->simulation_running
+		pthread_mutex_lock(&philo->shared_data->state_mutex);
+		if ((!philo->shared_data->simulation_running
 			) || (philo->state == DEAD
 			) || (philo->state == FINISHED))
 		{
-			pthread_mutex_unlock(&philo->mutexes->state_mutex);
+			pthread_mutex_unlock(&philo->shared_data->state_mutex);
 			break ;
 		}
-		pthread_mutex_unlock(&philo->mutexes->state_mutex);
+		pthread_mutex_unlock(&philo->shared_data->state_mutex);
 		current_time = get_time_ms();
 		elapsed = current_time - start_time;
 		if (elapsed >= time_ms)

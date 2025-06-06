@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:36 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/03 09:53:33 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/06 12:02:16 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_philosopher
 	t_state					state;
 	t_fork					*left;
 	t_fork					*right;
-	t_shared_data			*mutexes;
+	t_shared_data			*shared_data;
 }	t_philosopher;
 
 void	ft_usleep(long time_ms, t_philosopher *philo);
