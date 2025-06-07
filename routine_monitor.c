@@ -1,61 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routines.c                                         :+:      :+:    :+:   */
+/*   routine_monitor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 09:01:38 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/03 14:27:41 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/06 15:00:10 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// void	*monitor_routine(void *arg)
-// {
-// 	t_shared_data	*shared;
-// 	t_philosopher	**philos;
-// 	int				i;
-// 	long			current_time;
-
-// 	shared = (t_shared_data *)arg;
-// 	philos = shared->philos;
-// 	while (1)
-// 	{
-// 		usleep(1000);
-// 		pthread_mutex_lock(&shared->state_mutex);
-// 		if (!shared->simulation_running)
-// 		{
-// 			pthread_mutex_unlock(&shared->state_mutex);
-// 			break ;
-// 		}
-// 		pthread_mutex_unlock(&shared->state_mutex);
-// 		i = 0;
-// 		while (i < shared->philo_count)
-// 		{
-// 			pthread_mutex_lock(&shared->state_mutex);
-// 			current_time = get_time_ms();
-// 			if (philos[i]->state != FINISHED && philos[i
-// 				]->state != DEAD && current_time - philos[i
-// 				]->last_meal_time > philos[i]->dying_time)
-// 			{
-// 				shared->simulation_running = 0;
-// 				philos[i]->state = DEAD;
-// 				pthread_mutex_unlock(&shared->state_mutex);
-// 				pthread_mutex_lock(&shared->print_mutex);
-// 				printf("%ld %d died\n",
-// 					current_time - shared->start_time,
-// 					philos[i]->philo_id);
-// 				pthread_mutex_unlock(&shared->print_mutex);
-// 				return (NULL);
-// 			}
-// 			pthread_mutex_unlock(&shared->state_mutex);
-// 			i++;
-// 		}
-// 	}
-// 	return (NULL);
-// }
 
 void	handle_philosopher_death(t_shared_data *shared, t_philosopher *philo,
 		long current_time)
