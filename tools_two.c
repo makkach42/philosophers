@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:52:07 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/06 12:02:38 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/07 19:12:26 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	arr_maker(t_philosopher ***arr,
 		int philos_sum, char **argv, t_shared_data *shared)
 {
 	int				i;
-	struct timeval	current;
 
 	i = -1;
 	(*arr) = malloc(sizeof(t_philosopher *) * (philos_sum + 1));

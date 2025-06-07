@@ -11,7 +11,7 @@ all:	$(NAME)
 $(NAME):	$(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -pthread -o $(NAME)
 
-%.o:	%.c philosophers.h
+%.o:	%.c philo.h
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean: 

@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:49:42 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/06 12:03:08 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/07 19:12:17 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_atoi(char *str)
 	nbr = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
-	if (str && str[i] == '+' || str[i] == '-')
+	if (str && (str[i] == '+' || str[i] == '-'))
 	{
 		if (str[i] == '-')
 			sign = -1;
