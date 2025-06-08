@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:26:23 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/06 12:03:55 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/08 09:40:43 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	one_philo_case(t_philosopher **philo)
 {
 	print_status((*philo), "has taken a fork");
 	print_status((*philo), "is dead");
+	ft_usleep((*philo)->dying_time, (*philo));
 	(*philo)->shared_data->simulation_running = 0;
 }
 
