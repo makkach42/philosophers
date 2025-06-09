@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 09:45:23 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/03 09:53:19 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/09 09:00:58 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	free_forks(t_fork **arr)
 	i = 0;
 	while (arr[i])
 	{
+		pthread_mutex_destroy(&arr[i]->mutex);
 		free(arr[i]);
 		i++;
 	}

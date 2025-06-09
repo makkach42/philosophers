@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:15 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/06 12:01:54 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/09 09:03:10 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	main(int argc, char *argv[])
 		create_threads(&arr, &monitor, &shared);
 		join_all(&arr, &monitor);
 	}
-	free_philo(arr);
-	free_forks(arr_forks);
+	pthread_mutex_destroy(&shared.state_mutex);
+	pthread_mutex_destroy(&shared.print_mutex);
+	(free_philo(arr), free_forks(arr_forks));
 }

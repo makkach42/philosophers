@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:36 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/06 12:02:16 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/09 09:00:17 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_fork
 {
 	int				fork_id;
 	pthread_mutex_t	mutex;
-	struct s_fork	*next;
 }	t_fork;
 
 typedef struct s_shared_data
