@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:52:07 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/07 19:12:26 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/09 09:55:37 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,21 @@ int	check_simulation_state(t_philosopher *philo)
 	return (should_continue);
 }
 
-void	arr_maker(t_philosopher ***arr,
+int	arr_maker(t_philosopher ***arr,
 		int philos_sum, char **argv, t_shared_data *shared)
 {
 	int				i;
 
 	i = -1;
 	(*arr) = malloc(sizeof(t_philosopher *) * (philos_sum + 1));
+	if (!(*arr))
+		return ((*arr) = NULL, 1);
 	while (++i < philos_sum)
 	{
 		(*arr)[i] = malloc(sizeof(t_philosopher));
-		(*arr)[i]->dying_time = ft_atoi(argv[2]);
-		(*arr)[i]->eating_time = ft_atoi(argv[3]);
-		(*arr)[i]->sleep_time = ft_atoi(argv[4]);
-		(*arr)[i]->philo_thread = NULL;
+		if (!(*arr)[i])
+			return (((*arr)[i] = NULL, 1));
+		arr_maker_helper(arr, argv, i);
 		(*arr)[i]->last_meal_time = shared->start_time;
 		(*arr)[i]->philo_id = i + 1;
 		(*arr)[i]->left = NULL;
@@ -82,20 +83,30 @@ void	arr_maker(t_philosopher ***arr,
 			(*arr)[i]->times_to_eat = -1;
 	}
 	(*arr)[i] = NULL;
+	return (0);
 }
 
-void	fork_maker(t_fork ***arr_forks, int philos_sum)
+int	fork_maker(t_fork ***arr_forks, int philos_sum)
 {
 	int	i;
+	int	result;
 
 	(*arr_forks) = malloc(sizeof(t_fork *) * (philos_sum + 1));
+	if (!(*arr_forks))
+		return (*arr_forks = NULL, 1);
 	i = 0;
+	result = 0;
 	while (i < philos_sum)
 	{
 		(*arr_forks)[i] = malloc(sizeof(t_fork));
+		if (!(*arr_forks)[i])
+			return ((*arr_forks)[i] = NULL, 1);
 		(*arr_forks)[i]->fork_id = i + 1;
-		pthread_mutex_init(&(*arr_forks)[i]->mutex, NULL);
+		result = pthread_mutex_init(&(*arr_forks)[i]->mutex, NULL);
+		if (result != 0)
+			return (1);
 		i++;
 	}
 	(*arr_forks)[i] = NULL;
+	return (0);
 }

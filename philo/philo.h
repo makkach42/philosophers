@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:36 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/09 09:00:17 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/09 09:55:50 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	print_status(t_philosopher *philo, char *status);
 long	get_time_ms(void);
 int		parsing(char **argv);
 int		ft_atoi(char *str);
-void	fork_maker(t_fork ***arr_forks, int philos_sum);
-void	arr_maker(t_philosopher ***arr,
+int		fork_maker(t_fork ***arr_forks, int philos_sum);
+int		arr_maker(t_philosopher ***arr,
 			int philos_sum, char **argv, t_shared_data *shared);
 int		check_simulation_state(t_philosopher *philo);
 void	release_forks(t_philosopher *philo);
@@ -77,5 +77,10 @@ void	*routine(void *arg);
 void	*monitor_routine(void *arg);
 void	free_philo(t_philosopher **arr);
 void	free_forks(t_fork **arr);
+int		create_threads(t_philosopher ***arr,
+			pthread_t *monitor, t_shared_data *shared);
+void	init_shared(t_shared_data *shared, int philo_sum);
+void	set_forks_for_philos(t_philosopher ***arr, t_fork ***arr_forks);
+void	arr_maker_helper(t_philosopher ***arr, char **argv, int i);
 
 #endif
