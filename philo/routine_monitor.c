@@ -6,14 +6,15 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 09:01:38 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/09 10:17:28 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:08:45 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	handle_philosopher_death(t_shared_data *shared, t_philosopher *philo,
-		long current_time)
+static void	handle_philosopher_death(t_shared_data *shared,
+			t_philosopher *philo,
+			long current_time)
 {
 	shared->simulation_running = 0;
 	philo->state = DEAD;
@@ -24,7 +25,7 @@ void	handle_philosopher_death(t_shared_data *shared, t_philosopher *philo,
 	pthread_mutex_unlock(&shared->print_mutex);
 }
 
-int	check_single_philosopher_death(t_shared_data *shared, int index)
+static int	check_single_philosopher_death(t_shared_data *shared, int index)
 {
 	t_philosopher	*philo;
 	long			current_time;
@@ -45,7 +46,7 @@ int	check_single_philosopher_death(t_shared_data *shared, int index)
 	return (0);
 }
 
-int	check_philosophers_death(t_shared_data *shared)
+static int	check_philosophers_death(t_shared_data *shared)
 {
 	int	i;
 
@@ -59,7 +60,7 @@ int	check_philosophers_death(t_shared_data *shared)
 	return (0);
 }
 
-int	check_simulation_running(t_shared_data *shared)
+static int	check_simulation_running(t_shared_data *shared)
 {
 	int	running;
 
@@ -76,7 +77,7 @@ void	*monitor_routine(void *arg)
 	shared = (t_shared_data *)arg;
 	while (1)
 	{
-		usleep(1000);
+		usleep(100);
 		if (!check_simulation_running(shared))
 			break ;
 		if (check_philosophers_death(shared))

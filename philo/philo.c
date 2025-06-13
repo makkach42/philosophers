@@ -6,13 +6,13 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:15 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/09 09:54:11 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:05:38 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	join_all(t_philosopher ***arr, pthread_t *monitor)
+static int	join_all(t_philosopher ***arr, pthread_t *monitor)
 {
 	int	i;
 	int	result;
@@ -32,7 +32,7 @@ int	join_all(t_philosopher ***arr, pthread_t *monitor)
 	return (0);
 }
 
-int	destroy_all(t_shared_data *shared)
+static int	destroy_all(t_shared_data *shared)
 {
 	int	result;
 
@@ -46,8 +46,8 @@ int	destroy_all(t_shared_data *shared)
 	return (0);
 }
 
-int	execution(t_philosopher	***arr, t_fork ***arr_forks,
-	pthread_t *monitor, char **argv)
+static int	execution(t_philosopher	***arr, t_fork ***arr_forks,
+			pthread_t *monitor, char **argv)
 {
 	int				philo_sum;
 	t_shared_data	shared;
@@ -74,18 +74,12 @@ int	execution(t_philosopher	***arr, t_fork ***arr_forks,
 	return (0);
 }
 
-void	f(void)
-{
-	system("leaks -q philo");
-}
-
 int	main(int argc, char *argv[])
 {
 	t_philosopher	**arr;
 	t_fork			**arr_forks;
 	pthread_t		monitor;
 
-	atexit(f);
 	if (argc != 5 && argc != 6)
 		return (write(2, "parsing error\n", 15), 1);
 	else

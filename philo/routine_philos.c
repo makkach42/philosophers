@@ -6,13 +6,13 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:26:23 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/09 10:17:31 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:08:04 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	one_philo_case(t_philosopher **philo)
+static void	one_philo_case(t_philosopher **philo)
 {
 	print_status((*philo), "has taken a fork");
 	print_status((*philo), "is dead");
@@ -20,7 +20,7 @@ void	one_philo_case(t_philosopher **philo)
 	(*philo)->shared_data->simulation_running = 0;
 }
 
-void	if_finished(t_philosopher **philo)
+static void	if_finished(t_philosopher **philo)
 {
 	(*philo)->state = FINISHED;
 	(*philo)->shared_data->philos_finished++;
@@ -30,7 +30,7 @@ void	if_finished(t_philosopher **philo)
 	pthread_mutex_unlock(&(*philo)->shared_data->state_mutex);
 }
 
-void	eating_logic(int *meals_eaten, t_philosopher **philo)
+static void	eating_logic(int *meals_eaten, t_philosopher **philo)
 {
 	take_forks((*philo));
 	pthread_mutex_lock(&(*philo)->shared_data->state_mutex);
@@ -43,7 +43,7 @@ void	eating_logic(int *meals_eaten, t_philosopher **philo)
 	(*meals_eaten)++;
 }
 
-void	sleeping_logic(t_philosopher **philo)
+static void	sleeping_logic(t_philosopher **philo)
 {
 	print_status((*philo), "is sleeping");
 	ft_usleep((*philo)->sleep_time, (*philo));
