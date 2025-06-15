@@ -68,5 +68,4 @@ void	arr_maker_helper(t_philosopher ***arr, char **argv, int i)
 	(*arr)[i]->dying_time = ft_atoi(argv[2]);
 	(*arr)[i]->eating_time = ft_atoi(argv[3]);
 	(*arr)[i]->sleep_time = ft_atoi(argv[4]);
-	(*arr)[i]->philo_thread = NULL;
 }
