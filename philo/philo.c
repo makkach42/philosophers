@@ -68,7 +68,7 @@ static int	execution(t_philosopher	***arr, t_fork ***arr_forks,
 	set_forks_for_philos(&(*arr), &(*arr_forks));
 	shared.philos = (*arr);
 	if (create_threads(&(*arr), &(*monitor), &shared))
-		return (free_philo((*arr)), free_forks((*arr_forks)), 1);
+		return (free_philo((*arr)), free_forks((*arr_forks)), join_all(&(*arr), &(*monitor)), 1);
 	if (join_all(&(*arr), &(*monitor)))
 		return (free_philo((*arr)), free_forks((*arr_forks)), 1);
 	(free_philo((*arr)), free_forks((*arr_forks)));
