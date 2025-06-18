@@ -6,13 +6,13 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:15 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/11 15:05:38 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/18 22:32:45 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	join_all(t_philosopher ***arr, pthread_t *monitor)
+int	join_all(t_philosopher ***arr, pthread_t *monitor)
 {
 	int	i;
 	int	result;
@@ -26,9 +26,12 @@ static int	join_all(t_philosopher ***arr, pthread_t *monitor)
 			return (1);
 		i++;
 	}
-	result = pthread_join((*monitor), NULL);
-	if (result != 0)
-		return (1);
+	if (monitor)
+	{
+		result = pthread_join((*monitor), NULL);
+		if (result != 0)
+			return (1);
+	}
 	return (0);
 }
 
@@ -58,10 +61,10 @@ static int	execution(t_philosopher	***arr, t_fork ***arr_forks,
 	philo_sum = ft_atoi(argv[1]);
 	init_shared(&shared, philo_sum);
 	if (arr_maker(&(*arr), philo_sum, argv, &shared) == 1)
-		return (1);
+		return (free_philo(*arr), 1);
 	(*arr)[0]->shared_data->simulation_running = 1;
 	if (fork_maker(&(*arr_forks), philo_sum) == 1)
-		return (free_philo((*arr)), 1);
+		return (free_philo((*arr)), free_forks(*arr_forks), 1);
 	set_forks_for_philos(&(*arr), &(*arr_forks));
 	shared.philos = (*arr);
 	if (create_threads(&(*arr), &(*monitor), &shared))

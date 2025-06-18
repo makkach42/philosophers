@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:52:07 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/14 08:46:03 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/18 22:20:28 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ int	arr_maker(t_philosopher ***arr,
 	i = -1;
 	(*arr) = malloc(sizeof(t_philosopher *) * (philos_sum + 1));
 	if (!(*arr))
-		return ((*arr) = NULL, 1);
+		return (1);
 	while (++i < philos_sum)
 	{
 		(*arr)[i] = malloc(sizeof(t_philosopher));
 		if (!(*arr)[i])
-			return (((*arr)[i] = NULL, 1));
+			return (1);
 		arr_maker_helper(arr, argv, i);
 		(*arr)[i]->last_meal_time = shared->start_time;
 		(*arr)[i]->philo_id = i + 1;
@@ -93,14 +93,14 @@ int	fork_maker(t_fork ***arr_forks, int philos_sum)
 
 	(*arr_forks) = malloc(sizeof(t_fork *) * (philos_sum + 1));
 	if (!(*arr_forks))
-		return (*arr_forks = NULL, 1);
+		return (1);
 	i = 0;
 	result = 0;
 	while (i < philos_sum)
 	{
 		(*arr_forks)[i] = malloc(sizeof(t_fork));
 		if (!(*arr_forks)[i])
-			return ((*arr_forks)[i] = NULL, 1);
+			return (1);
 		(*arr_forks)[i]->fork_id = i + 1;
 		result = pthread_mutex_init(&(*arr_forks)[i]->mutex, NULL);
 		if (result != 0)

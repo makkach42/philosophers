@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 09:53:33 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/09 09:55:44 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/18 22:34:41 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	create_threads(t_philosopher ***arr,
 			result = pthread_create(&(*arr)[i]->philo_thread,
 					NULL, routine, (void *)(*arr)[i]);
 			if (result != 0)
-				return (1);
+				return (join_all(arr, NULL), 1);
 		}
 		i++;
 	}

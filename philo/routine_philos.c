@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:26:23 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/14 18:21:48 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/18 22:22:55 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static void	one_philo_case(t_philosopher **philo)
 	print_status((*philo), "has taken a fork");
 	print_status((*philo), "is dead");
 	ft_usleep((*philo)->dying_time, (*philo));
+	pthread_mutex_lock(&(*philo)->shared_data->state_mutex);
 	(*philo)->shared_data->simulation_running = 0;
+	pthread_mutex_unlock(&(*philo)->shared_data->state_mutex);
 }
 
 static void	if_finished(t_philosopher **philo)
