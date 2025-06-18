@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:49:42 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/07 19:12:17 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/18 22:48:42 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,18 @@ void	print_status(t_philosopher *philo, char *status)
 {
 	long	current_time;
 
-	pthread_mutex_lock(&philo->shared_data->print_mutex);
+	pthread_mutex_lock(&philo->shared_data->state_mutex);
 	if (philo->shared_data->simulation_running)
 	{
 		current_time = get_time_ms();
+		pthread_mutex_lock(&philo->shared_data->print_mutex);
 		printf("%ld %d %s\n",
 			current_time - philo->shared_data->start_time,
 			philo->philo_id,
 			status);
+		pthread_mutex_unlock(&philo->shared_data->print_mutex);
 	}
-	pthread_mutex_unlock(&philo->shared_data->print_mutex);
+	pthread_mutex_unlock(&philo->shared_data->state_mutex);
 }
 
 void	ft_usleep(long time_ms, t_philosopher *philo)

@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 09:01:38 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/11 15:08:45 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/18 22:47:48 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static void	handle_philosopher_death(t_shared_data *shared,
 			t_philosopher *philo,
 			long current_time)
 {
+	// pthread_mutex_lock(&philo->shared_data->state_mutex);
 	shared->simulation_running = 0;
+	// pthread_mutex_unlock(&philo->shared_data->state_mutex);
 	philo->state = DEAD;
 	pthread_mutex_unlock(&shared->state_mutex);
 	pthread_mutex_lock(&shared->print_mutex);
