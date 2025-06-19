@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:15 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/18 22:32:45 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/19 11:10:25 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	join_all(t_philosopher ***arr, pthread_t *monitor)
 			return (1);
 		i++;
 	}
-	if (monitor)
+	if (monitor && (**arr)->shared_data->philo_count != 1)
 	{
 		result = pthread_join((*monitor), NULL);
 		if (result != 0)
@@ -68,7 +68,7 @@ static int	execution(t_philosopher	***arr, t_fork ***arr_forks,
 	set_forks_for_philos(&(*arr), &(*arr_forks));
 	shared.philos = (*arr);
 	if (create_threads(&(*arr), &(*monitor), &shared))
-		return (free_philo((*arr)), free_forks((*arr_forks)), join_all(&(*arr), &(*monitor)), 1);
+		return (free_philo((*arr)), free_forks((*arr_forks)), 1);
 	if (join_all(&(*arr), &(*monitor)))
 		return (free_philo((*arr)), free_forks((*arr_forks)), 1);
 	(free_philo((*arr)), free_forks((*arr_forks)));

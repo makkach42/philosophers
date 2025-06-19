@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:26:23 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/18 22:22:55 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/19 11:11:24 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	one_philo_case(t_philosopher **philo)
 {
 	print_status((*philo), "has taken a fork");
-	print_status((*philo), "is dead");
-	ft_usleep((*philo)->dying_time, (*philo));
+	ft_usleep((*philo)->dying_time + 1, (*philo));
+	print_status((*philo), "is died");
 	pthread_mutex_lock(&(*philo)->shared_data->state_mutex);
 	(*philo)->shared_data->simulation_running = 0;
 	pthread_mutex_unlock(&(*philo)->shared_data->state_mutex);
@@ -60,7 +60,7 @@ void	*routine(void *arg)
 	philo = (t_philosopher *)arg;
 	meals_eaten = 0;
 	if (philo->philo_id % 2 == 0)
-		ft_usleep(philo->eating_time / 2, philo);
+		ft_usleep(120, philo);
 	while (check_simulation_state(philo))
 	{
 		if (philo->shared_data->philo_count == 1)
