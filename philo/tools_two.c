@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:52:07 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/18 22:20:28 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/20 08:56:00 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	fork_maker(t_fork ***arr_forks, int philos_sum)
 		(*arr_forks)[i]->fork_id = i + 1;
 		result = pthread_mutex_init(&(*arr_forks)[i]->mutex, NULL);
 		if (result != 0)
-			return (1);
+			return (free_forks_to_idx(*arr_forks, i), 2);
 		i++;
 	}
 	(*arr_forks)[i] = NULL;

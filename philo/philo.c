@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:15 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/19 11:10:25 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/20 08:55:36 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int	execution(t_philosopher	***arr, t_fork ***arr_forks,
 {
 	int				philo_sum;
 	t_shared_data	shared;
+	int				results;
 
 	philo_sum = 0;
 	if (parsing(argv) == 1)
@@ -63,8 +64,9 @@ static int	execution(t_philosopher	***arr, t_fork ***arr_forks,
 	if (arr_maker(&(*arr), philo_sum, argv, &shared) == 1)
 		return (free_philo(*arr), 1);
 	(*arr)[0]->shared_data->simulation_running = 1;
-	if (fork_maker(&(*arr_forks), philo_sum) == 1)
-		return (free_philo((*arr)), free_forks(*arr_forks), 1);
+	results = fork_maker(&(*arr_forks), philo_sum);
+	if (results == 1 || results == 2)
+		return (fork_returns(arr, arr_forks, results));
 	set_forks_for_philos(&(*arr), &(*arr_forks));
 	shared.philos = (*arr);
 	if (create_threads(&(*arr), &(*monitor), &shared))

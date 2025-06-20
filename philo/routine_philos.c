@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:26:23 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/19 11:30:37 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/19 13:16:55 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	*routine(void *arg)
 	philo = (t_philosopher *)arg;
 	meals_eaten = 0;
 	if (philo->philo_id % 2 == 0)
-		ft_usleep(120, philo);
+		ft_usleep(philo->eating_time / 2, philo);
 	while (check_simulation_state(philo))
 	{
 		if (philo->shared_data->philo_count == 1)

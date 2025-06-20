@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:36 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/18 22:30:26 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/20 08:49:57 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ void	init_shared(t_shared_data *shared, int philo_sum);
 void	set_forks_for_philos(t_philosopher ***arr, t_fork ***arr_forks);
 void	arr_maker_helper(t_philosopher ***arr, char **argv, int i);
 int		join_all(t_philosopher ***arr, pthread_t *monitor);
+void	free_forks_to_idx(t_fork **arr, int j);
+int		fork_returns(t_philosopher ***arr, t_fork ***arr_forks, int results);
 
 #endif
