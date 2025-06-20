@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 09:45:23 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/20 08:51:50 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/20 16:16:32 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_philo(t_philosopher **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (arr && arr[i])
 	{
 		free(arr[i]);
 		i++;
@@ -30,7 +30,7 @@ void	free_forks(t_fork **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (arr && arr[i])
 	{
 		pthread_mutex_destroy(&arr[i]->mutex);
 		free(arr[i]);
