@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:52:07 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/20 08:56:00 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/20 16:04:58 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	take_forks(t_philosopher *philo)
 {
-	if (philo->left->fork_id < philo->right->fork_id)
+	if (philo->philo_id % 2 == 0 && (philo->left->fork_id
+		) < philo->right->fork_id)
 	{
 		pthread_mutex_lock(&philo->left->mutex);
 		print_status(philo, "has taken a fork");
