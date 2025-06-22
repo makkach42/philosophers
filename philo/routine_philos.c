@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:26:23 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/20 16:11:43 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/22 08:40:56 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	one_philo_case(t_philosopher **philo)
 	pthread_mutex_unlock(&(*philo)->shared_data->state_mutex);
 }
 
-static void	if_finished(t_philosopher **philo)
+void	if_finished(t_philosopher **philo)
 {
 	(*philo)->state = FINISHED;
 	(*philo)->shared_data->philos_finished++;
@@ -37,7 +37,7 @@ static void	eating_logic(int *meals_eaten, t_philosopher **philo)
 	take_forks((*philo));
 	pthread_mutex_lock(&(*philo)->shared_data->state_mutex);
 	(*philo)->state = EATING;
-	(*philo)->last_meal_time = get_time_ms();
+	(*philo)->last_meal_time = get_current_time_ms();
 	pthread_mutex_unlock(&(*philo)->shared_data->state_mutex);
 	print_status((*philo), "is eating");
 	ft_usleep((*philo)->eating_time, (*philo));
@@ -50,6 +50,8 @@ static void	sleeping_logic(t_philosopher **philo)
 	print_status((*philo), "is sleeping");
 	ft_usleep((*philo)->sleep_time, (*philo));
 	print_status((*philo), "is thinking");
+	if ((*philo)->shared_data->philo_count % 2 == 1)
+		ft_usleep(10, (*philo));
 }
 
 void	*routine(void *arg)
@@ -63,9 +65,6 @@ void	*routine(void *arg)
 		ft_usleep(philo->eating_time / 2, philo);
 	while (check_simulation_state(philo))
 	{
-		if ((philo->shared_data->philo_count % 2 != 0
-			) && philo->philo_id % 3 == 0)
-			ft_usleep(10, philo);
 		if (philo->shared_data->philo_count == 1)
 		{
 			one_philo_case(&philo);
@@ -73,11 +72,8 @@ void	*routine(void *arg)
 		}
 		eating_logic(&meals_eaten, &philo);
 		pthread_mutex_lock(&philo->shared_data->state_mutex);
-		if (philo->times_to_eat != -1 && meals_eaten >= philo->times_to_eat)
-		{
-			if_finished(&philo);
+		if (finished_check(philo, meals_eaten))
 			break ;
-		}
 		pthread_mutex_unlock(&philo->shared_data->state_mutex);
 		sleeping_logic(&philo);
 	}

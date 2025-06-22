@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 09:53:33 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/20 08:46:19 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/22 08:44:43 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_shared(t_shared_data *shared, int philo_sum)
 	pthread_mutex_init(&shared->state_mutex, NULL);
 	shared->simulation_running = 1;
 	shared->philo_count = philo_sum;
-	shared->start_time = get_time_ms();
+	shared->start_time = get_current_time_ms();
 	shared->philos_finished = 0;
 }
 
@@ -61,7 +61,7 @@ int	create_threads(t_philosopher ***arr,
 	{
 		result = pthread_create(monitor, NULL, monitor_routine, shared);
 		if (result != 0)
-			return (1);
+			return (shared->simulation_running = 0, join_all(arr, NULL), 1);
 	}
 	return (0);
 }
@@ -71,4 +71,14 @@ void	arr_maker_helper(t_philosopher ***arr, char **argv, int i)
 	(*arr)[i]->dying_time = ft_atoi(argv[2]);
 	(*arr)[i]->eating_time = ft_atoi(argv[3]);
 	(*arr)[i]->sleep_time = ft_atoi(argv[4]);
+}
+
+int	finished_check(t_philosopher *philo, int meals_eaten)
+{
+	if (philo->times_to_eat != -1 && meals_eaten >= philo->times_to_eat)
+	{
+		if_finished(&philo);
+		return (1);
+	}
+	return (0);
 }

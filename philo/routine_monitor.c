@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 09:01:38 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/19 11:13:46 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/22 08:17:27 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	check_single_philosopher_death(t_shared_data *shared, int index)
 
 	philo = shared->philos[index];
 	pthread_mutex_lock(&shared->state_mutex);
-	current_time = get_time_ms();
+	current_time = get_current_time_ms();
 	is_dead = (philo->state != FINISHED && philo->state != DEAD
 			&& current_time - philo->last_meal_time > philo->dying_time);
 	if (is_dead)

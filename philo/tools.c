@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:49:42 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/18 22:48:42 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/22 08:40:51 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ int	parsing(char **argv)
 	return (0);
 }
 
-long	get_time_ms(void)
+long	get_current_time_ms(void)
 {
-	struct timeval	tv;
+	struct timeval	time;
+	long			time_ms;
 
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+	gettimeofday(&time, NULL);
+	time_ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (time_ms);
 }
 
 void	print_status(t_philosopher *philo, char *status)
@@ -85,7 +87,7 @@ void	print_status(t_philosopher *philo, char *status)
 	pthread_mutex_lock(&philo->shared_data->state_mutex);
 	if (philo->shared_data->simulation_running)
 	{
-		current_time = get_time_ms();
+		current_time = get_current_time_ms();
 		pthread_mutex_lock(&philo->shared_data->print_mutex);
 		printf("%ld %d %s\n",
 			current_time - philo->shared_data->start_time,
@@ -102,7 +104,7 @@ void	ft_usleep(long time_ms, t_philosopher *philo)
 	long	current_time;
 	long	elapsed;
 
-	start_time = get_time_ms();
+	start_time = get_current_time_ms();
 	while (1)
 	{
 		pthread_mutex_lock(&philo->shared_data->state_mutex);
@@ -114,7 +116,7 @@ void	ft_usleep(long time_ms, t_philosopher *philo)
 			break ;
 		}
 		pthread_mutex_unlock(&philo->shared_data->state_mutex);
-		current_time = get_time_ms();
+		current_time = get_current_time_ms();
 		elapsed = current_time - start_time;
 		if (elapsed >= time_ms)
 			break ;

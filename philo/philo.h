@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:36 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/20 08:49:57 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/22 08:17:27 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_philosopher
 
 void	ft_usleep(long time_ms, t_philosopher *philo);
 void	print_status(t_philosopher *philo, char *status);
-long	get_time_ms(void);
+long	get_current_time_ms(void);
 int		parsing(char **argv);
 int		ft_atoi(char *str);
 int		fork_maker(t_fork ***arr_forks, int philos_sum);
@@ -85,5 +85,7 @@ void	arr_maker_helper(t_philosopher ***arr, char **argv, int i);
 int		join_all(t_philosopher ***arr, pthread_t *monitor);
 void	free_forks_to_idx(t_fork **arr, int j);
 int		fork_returns(t_philosopher ***arr, t_fork ***arr_forks, int results);
+int		finished_check(t_philosopher *philo, int meals_eaten);
+void	if_finished(t_philosopher **philo);
 
 #endif
