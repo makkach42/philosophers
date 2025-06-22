@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:36 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/22 08:17:27 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/22 13:56:21 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@
 
 typedef enum state
 {
-	ALIVE = 0,
-	THINKING = 1,
-	SLEEPING = 2,
-	EATING = 3,
-	DEAD = 4,
-	FINISHED = 5
+	THINKING = 0,
+	SLEEPING = 1,
+	EATING = 2,
+	DEAD = 3,
+	FINISHED = 4
 }	t_state;
 
 typedef struct s_fork
