@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 09:45:23 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/20 16:16:32 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/23 08:32:13 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,15 @@ int	fork_returns(t_philosopher ***arr, t_fork ***arr_forks, int results)
 		return (free_philo((*arr)), free_forks(*arr_forks), 1);
 	else if (results == 2)
 		return (free_philo((*arr)), 1);
+	return (0);
+}
+
+int	join_monitor(pthread_t *monitor)
+{
+	int	result;
+
+	result = pthread_join(*monitor, NULL);
+	if (result != 0)
+		return (1);
 	return (0);
 }

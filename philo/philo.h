@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 08:55:36 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/22 18:55:46 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/23 08:32:19 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void	free_forks_to_idx(t_fork **arr, int j);
 int		fork_returns(t_philosopher ***arr, t_fork ***arr_forks, int results);
 int		finished_check(t_philosopher *philo, int meals_eaten);
 void	if_finished(t_philosopher **philo);
+int		join_monitor(pthread_t *monitor);
 
 #endif

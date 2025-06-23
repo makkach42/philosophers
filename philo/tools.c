@@ -6,7 +6,7 @@
 /*   By: makkach <makkach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 08:49:42 by makkach           #+#    #+#             */
-/*   Updated: 2025/06/22 08:40:51 by makkach          ###   ########.fr       */
+/*   Updated: 2025/06/23 08:34:11 by makkach          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,6 @@ int	parsing(char **argv)
 				return (1);
 			j++;
 		}
-		i++;
-	}
-	i = 1;
-	while (argv[i])
-	{
-		j = ft_atoi(argv[i]);
-		if (j <= 0)
-			return (1);
 		i++;
 	}
 	return (0);
